@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: flask-hello-world:latest  # Replace with your Docker image name
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          value: mysql://root:password@mysql-service:3306/mydatabase  # Update with MySQL details
